@@ -1,0 +1,46 @@
+# Default values for alerts-report.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 2
+
+image:
+  repository: docker.io/pnkj9023/go-multi-stage
+  tag: latest
+  pullPolicy: Always
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: NodePort
+  port: 31000
+  containerPort: 5000
+
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  limits:
+    cpu: 2
+    memory: 8Gi
+  requests:
+    cpu: 500m
+    memory: 2Gi
+
+controller:
+
+  autoscaling:
+    minReplicas: 1
+    maxReplicas: 10
+    targetAverageUtilization: 60
+
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
