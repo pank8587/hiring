@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: http-server
+  labels:
+    app: pankaj
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: pankaj
+  template:
+    metadata:
+      labels:
+        app: pankaj
+    spec:
+      containers:
+      - name: http-server
+        image: docker.io/pnkj9023/go-multi-stage
+        ports:
+        - containerPort: 5000
